@@ -45,3 +45,9 @@ class Perceptron:
         weighted_sum = np.dot(sample, self.weights)
         y_pred = np.sign(weighted_sum)
         return y_pred
+    
+    def one_vs_all(self, sample):
+        sample = np.hstack((1, sample))
+        weighted_sum = np.dot(sample, self.weights)
+
+        return weighted_sum

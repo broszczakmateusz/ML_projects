@@ -3,8 +3,8 @@ import numpy as np
 
 df = pd.read_csv("/home/mateusz/ML/KNN/iris.data", header=None)
 
-seed = 15
-train, validate, test = np.split(df.sample(frac = 1, random_state = seed), [int(.6*len(df)), int(.8*len(df))])
+
+train, validate, test = np.split(df.sample(frac = 1), [int(.6*len(df)), int(.8*len(df))])
 
 train = pd.DataFrame(train).to_csv(header=None)
 validate = pd.DataFrame(validate).to_csv(header=None)
