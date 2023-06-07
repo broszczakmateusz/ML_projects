@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-def confusion_matrix(target, predicted, n, index_dict):
+def confusion_matrix(target, predicted, n, index_dict, labels):
         M = np.zeros((n,n), dtype=int)
         
         # dla każdej próbki zmień klasę przewidywaną i rzeczywistą 
@@ -13,8 +13,8 @@ def confusion_matrix(target, predicted, n, index_dict):
         pred_labels = []
         target_labels = []
         for i in range(M.shape[0]):
-            pred_labels.append(f"pred_{i}")
-            target_labels.append(f"target_{i}")
+            pred_labels.append(f"pred_{labels[i]}")
+            target_labels.append(f"target_{labels[i]}")
         M = pd.DataFrame(data = M, columns = pred_labels, index = target_labels)
 
         return M
