@@ -13,8 +13,8 @@ def confusion_matrix(target, predicted, n, index_dict, labels):
         pred_labels = []
         target_labels = []
         for i in range(M.shape[0]):
-            pred_labels.append(f"pred_{labels[i]}")
-            target_labels.append(f"target_{labels[i]}")
+            pred_labels.append(f"predicted {labels[i]}")
+            target_labels.append(f"target {labels[i]}")
         M = pd.DataFrame(data = M, columns = pred_labels, index = target_labels)
 
         return M

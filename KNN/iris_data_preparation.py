@@ -17,3 +17,9 @@ def split_iris_data():
     for i in range(0,3):
         with open(output_files[i], 'w') as f_out:
             f_out.writelines(data_sets[i])
+
+def main():
+    split_iris_data()
+
+if __name__ == '__main__':
+    main()

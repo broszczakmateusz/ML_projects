@@ -43,14 +43,16 @@ def make_binary_classes(classes, selected_class):
     return classes
 
 def algorithm_stats(algorithm_name, y_validate, predicted_classes):
-    labels = {0: "Iris-setosa",1: "Iris-versicolor",2: "Iris-virginica"}
+    labels = {0: "Iris setosa", 1: "Iris versicolor", 2: "Iris virginica"}
 
     M = confusion_matrix(target=y_validate, predicted=predicted_classes, n=3, index_dict= {0: 0, 1: 1, 2: 2}, labels=labels)
     acc = calculate_accuracy(target=y_validate, predicted=predicted_classes)
-    print(f"\t***{algorithm_name}***")
-    print("Confusion matrix")
-    print(M)
-    print(f"Accuracy: {acc}\n")
+    # print("\n\n")
+    # print(f"\t\t{algorithm_name}")
+    # print("Confusion matrix")
+    # print(M)
+    # print(f"Accuracy: {acc}\n")
+    print(f'{algorithm_name}\t{acc}')
 
 def main():
     train_data =  prepare_data_set("/home/mateusz/ML/KNN/iris.train")
@@ -79,13 +81,13 @@ def main():
         perceptrons.append(perceptron)
 
     # trenowanie MLP
-    MLP = MLPClassifier(random_state=1, max_iter=300).fit(X_train.tolist(), y_train.tolist())
+    MLP = MLPClassifier(hidden_layer_sizes=(100,), random_state=1, max_iter=200).fit(X_train.tolist(), y_train.tolist())
 
     # trenowanie drzewo decyzyjne
-    decision_tree = DecisionTreeClassifier().fit(X_train.tolist(), y_train.tolist())
+    decision_tree = DecisionTreeClassifier(criterion="gini", random_state=1).fit(X_train.tolist(), y_train.tolist())
 
     # trenowanie SVM
-    SVM = SVC().fit(X_train.tolist(), y_train.tolist())
+    SVM = SVC(kernel="rbf", degree=3, random_state=1).fit(X_train.tolist(), y_train.tolist())
 
     # klasyfikacja KNN
     predicted_classes = []
@@ -118,14 +120,23 @@ def main():
     predicted_classes = SVM.predict(X=X_validate)
     algorithm_stats("SVM", y_validate, predicted_classes)
 
+
+    # # klasyfikacja dla zbioru testowego dla najlepszego klasyfikatora 
+    # test_data =  prepare_data_set("/home/mateusz/ML/KNN/iris.test")
+    # y_test = test_data["class"]
+    # X_test = test_data.drop("class", axis=1).values
+
+    # predicted_test_classes = MLP.predict(X_test)
+    # algorithm_stats("TEST_set_MLP", y_test, predicted_test_classes)
+
+
 if __name__ == '__main__':
     main()
 
 # todo
-# opisać wpływ k na accuracy
-# opisać metryki
-# opisać 3 klasyfikatory
-
 # wpływ hiperparametrów na accuracy
-# opisać badania
+# zbior testowy dla 3
+# opisac badania:
+#           zbior testowy dla 3
+#           wpływ hiperparametrów na accuracy
 # przedstawić wnioski
